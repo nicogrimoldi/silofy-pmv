@@ -48,13 +48,23 @@ const forecast = [
 ];
 
 // —— Utilidades ——
-function RiskBadge({ risk }: { risk: number }) {
-  let label = "Bajo"; let style = "secondary";
-  if (risk >= 0.75) { label = "Alto"; style = "destructive"; }
-  else if (risk >= 0.4) { label = "Medio"; style = "default"; }
+function RiskBadge(props) {
+  const risk = props.risk;
+  let label = "Bajo";
+  let style = "secondary";
+  if (risk >= 0.75) {
+    label = "Alto";
+    style = "destructive";
+  } else if (risk >= 0.4) {
+    label = "Medio";
+    style = "default";
+  }
   return <Badge variant={style}>{label}</Badge>;
 }
-function k(n: number) { return n.toLocaleString("es-AR"); }
+
+function k(n) {
+  return n.toLocaleString("es-AR");
+}
 
 export default function SilofyDashboard() {
   console.log("[Silofy] Render start");
@@ -140,7 +150,7 @@ export default function SilofyDashboard() {
             </div>
             <div>
               <label className="text-xs text-slate-500">Cultivo</label>
-              <Select value={crop} onValueChange={(v)=>{ console.log("[Silofy] Crop change:", v); setCrop(v as any); }}>
+              <Select value={crop} onValueChange={(v)=>{ console.log("[Silofy] Crop change:", v); setCrop(v); }}>
                 <SelectTrigger className="border-[#3FAE49]/30"><SelectValue placeholder="Todos" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Todas">Todos</SelectItem>
@@ -150,7 +160,7 @@ export default function SilofyDashboard() {
             </div>
             <div>
               <label className="text-xs text-slate-500">Establecimiento</label>
-              <Select value={farm} onValueChange={(v)=>{ console.log("[Silofy] Farm change:", v); setFarm(v as any); }}>
+              <Select value={farm} onValueChange={(v) => { console.log("[Silofy] Farm change:", v); setFarm(v); }}>
                 <SelectTrigger className="border-[#3FAE49]/30"><SelectValue placeholder="Todos" /></SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Todas">Todos</SelectItem>
